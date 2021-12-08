@@ -1,0 +1,36 @@
+enum MemeberType { GROUP, INDIVIDUAL}
+enum SupportStatus {ACTIVE, SUPPORTED, ON_INVESTIGATION}
+entity Member {
+    coverPhoto ImageBlob
+    coverPhotoUrl String
+    memberId String unique
+    name String
+    memberType MemeberType
+    firstName String
+    middleName String
+    lastName String
+    age Integer
+    latitude String
+    longitude String
+    address String
+    caseDescription TextBlob
+    videoUrl String
+    targetedSupport Double
+    supportStatus SupportStatus
+}
+entity AccountInformation {
+    bankName String
+    accountNumber String
+    collectedAmount BigDecimal
+}
+entity ProblemType {
+    name String
+    description TextBlob
+}
+relationship OneToMany {
+    ProblemType{member(memberId)} to Member{problemType(name)}
+    Member{accountInformation(bankName)} to AccountInformation{member(memberId)}
+}
+relationship ManyToOne {
+    Member{user(login)} to User
+}
