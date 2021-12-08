@@ -34,3 +34,8 @@ relationship OneToMany {
 relationship ManyToOne {
     Member{user(login)} to User
 }
+filter *
+dto * with mapstruct
+service * with serviceClass
+service * with serviceImpl
+paginate * with pagination
